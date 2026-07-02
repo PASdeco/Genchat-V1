@@ -1,0 +1,478 @@
+:host,
+.genchat-root {
+  all: initial;
+  font-family: Inter, "Segoe UI", sans-serif;
+  color: var(--gc-text);
+}
+
+.genchat-app {
+  --gc-accent: #5d5fef;
+  --gc-accent-soft: rgba(93, 95, 239, 0.14);
+  --gc-surface: #f8f8fb;
+  --gc-surface-strong: #ffffff;
+  --gc-surface-muted: #eef0f7;
+  --gc-text: #11131a;
+  --gc-text-soft: #5f6471;
+  --gc-border: rgba(17, 19, 26, 0.08);
+  --gc-shadow: 0 12px 36px rgba(16, 17, 20, 0.16);
+  --gc-success: #2f9e6e;
+  --gc-warning: #e89a34;
+  --gc-danger: #d95361;
+  position: fixed;
+  inset: auto 20px 20px auto;
+  z-index: 2147483000;
+  font-family: Inter, "Segoe UI", sans-serif;
+  line-height: 1.4;
+  color: var(--gc-text);
+}
+
+.genchat-app[data-theme="dark"] {
+  --gc-surface: #181a22;
+  --gc-surface-strong: #1f2230;
+  --gc-surface-muted: #262b3a;
+  --gc-text: #f4f5f8;
+  --gc-text-soft: #a8adba;
+  --gc-border: rgba(255, 255, 255, 0.08);
+  --gc-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
+}
+
+.genchat-app[data-dock="left"] {
+  inset: auto auto 20px 20px;
+}
+
+.genchat-trigger {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #5d5fef, #3ab5aa);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--gc-shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.genchat-trigger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 16px 36px rgba(65, 84, 212, 0.25);
+}
+
+.genchat-trigger-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.genchat-app[data-dock="left"] .genchat-trigger-row {
+  justify-content: flex-start;
+}
+
+.genchat-trigger-label {
+  max-width: 220px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--gc-surface-strong);
+  box-shadow: var(--gc-shadow);
+  color: var(--gc-text-soft);
+  font-size: 13px;
+}
+
+.genchat-panel {
+  width: min(408px, calc(100vw - 24px));
+  max-height: min(620px, calc(100vh - 32px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--gc-surface-strong);
+  box-shadow: var(--gc-shadow);
+  border: 1px solid var(--gc-border);
+}
+
+.genchat-panel-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.genchat-app[data-dock="left"] .genchat-panel-shell {
+  align-items: flex-start;
+}
+
+.genchat-header,
+.genchat-context,
+.genchat-input-wrap,
+.genchat-empty {
+  padding: 16px;
+}
+
+.genchat-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--gc-border);
+}
+
+.genchat-brand {
+  display: flex;
+  gap: 10px;
+}
+
+.genchat-brand-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #5d5fef, #3ab5aa);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.genchat-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.genchat-subtitle,
+.genchat-context-chip,
+.genchat-meta,
+.genchat-empty-copy {
+  color: var(--gc-text-soft);
+}
+
+.genchat-subtitle {
+  font-size: 13px;
+}
+
+.genchat-header-actions {
+  display: flex;
+  gap: 6px;
+  position: relative;
+}
+
+.genchat-icon-button,
+.genchat-send-button,
+.genchat-chip {
+  border: none;
+  cursor: pointer;
+  transition: transform 160ms ease, background-color 160ms ease, opacity 160ms ease;
+}
+
+.genchat-icon-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--gc-text-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.genchat-icon-button:hover {
+  background: var(--gc-surface-muted);
+  color: var(--gc-text);
+}
+
+.genchat-context {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid var(--gc-border);
+  background: linear-gradient(180deg, var(--gc-accent-soft), transparent);
+}
+
+.genchat-context-chip,
+.genchat-term-chip,
+.genchat-settings-menu,
+.genchat-message,
+.genchat-chip {
+  border-radius: 12px;
+}
+
+.genchat-context-chip {
+  align-self: flex-start;
+  padding: 6px 10px;
+  background: var(--gc-surface-muted);
+  font-size: 12px;
+}
+
+.genchat-context p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.genchat-messages {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 10px;
+  padding: 16px;
+  overflow: auto;
+  min-height: 140px;
+  min-height: 0;
+}
+
+.genchat-message-row {
+  display: flex;
+  gap: 8px;
+}
+
+.genchat-message-row[data-role="user"] {
+  justify-content: flex-end;
+}
+
+.genchat-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gc-surface-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gc-accent);
+  flex-shrink: 0;
+}
+
+.genchat-message {
+  max-width: 85%;
+  padding: 12px 14px;
+  background: var(--gc-surface);
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  color: var(--gc-text);
+}
+
+.genchat-message-row[data-role="user"] .genchat-message {
+  background: var(--gc-accent-soft);
+}
+
+.genchat-message p,
+.genchat-message ul {
+  margin: 0;
+}
+
+.genchat-message ul {
+  padding-left: 18px;
+}
+
+.genchat-citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.genchat-citation {
+  font-size: 12px;
+  color: var(--gc-text-soft);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--gc-surface-muted);
+}
+
+.genchat-quick-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 16px 14px;
+}
+
+.genchat-chip {
+  padding: 9px 12px;
+  white-space: nowrap;
+  font-size: 13px;
+  background: var(--gc-surface);
+  color: var(--gc-text);
+}
+
+.genchat-chip:hover {
+  transform: translateY(-1px);
+  background: var(--gc-accent-soft);
+}
+
+.genchat-empty {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 10px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.genchat-empty-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.genchat-empty-copy {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.genchat-input-wrap {
+  border-top: 1px solid var(--gc-border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.genchat-input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.genchat-input {
+  flex: 1;
+  border: 1px solid var(--gc-border);
+  border-radius: 14px;
+  background: var(--gc-surface);
+  color: var(--gc-text);
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.45;
+  outline: none;
+}
+
+.genchat-input:focus {
+  border-color: rgba(93, 95, 239, 0.35);
+  box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.12);
+}
+
+.genchat-send-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--gc-accent);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.genchat-send-button:disabled,
+.genchat-chip:disabled,
+.genchat-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.genchat-settings-menu {
+  position: absolute;
+  right: 0;
+  top: 42px;
+  width: 220px;
+  background: var(--gc-surface-strong);
+  border: 1px solid var(--gc-border);
+  box-shadow: var(--gc-shadow);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.genchat-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.genchat-switch {
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  border: none;
+  background: var(--gc-surface-muted);
+  position: relative;
+}
+
+.genchat-switch::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 160ms ease;
+}
+
+.genchat-switch[data-on="true"] {
+  background: var(--gc-accent);
+}
+
+.genchat-switch[data-on="true"]::after {
+  transform: translateX(18px);
+}
+
+.genchat-term-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--gc-surface-muted);
+  color: var(--gc-text-soft);
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+.genchat-inline-highlight {
+  border-bottom: 1px dotted rgba(93, 95, 239, 0.85);
+  cursor: pointer;
+}
+
+.genchat-highlight-popover {
+  position: absolute;
+  max-width: 240px;
+  background: #1a1e29;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+  font-size: 13px;
+  z-index: 2147483001;
+}
+
+.genchat-status {
+  font-size: 12px;
+  color: var(--gc-text-soft);
+}
+
+@media (max-width: 480px) {
+  .genchat-app,
+  .genchat-app[data-dock="left"] {
+    inset: auto 8px 8px 8px;
+  }
+
+  .genchat-panel {
+    width: calc(100vw - 16px);
+    max-height: min(78vh, 620px);
+    border-radius: 20px 20px 18px 18px;
+  }
+
+  .genchat-panel::before {
+    content: "";
+    width: 46px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--gc-border);
+    align-self: center;
+    margin-top: 10px;
+  }
+}
