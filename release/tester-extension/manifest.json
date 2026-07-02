@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "GenChat",
+  "version": "0.1.0",
+  "description": "A contextual reading companion for GenLayer content.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/main.tsx-loader-kjr_m1XT.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "resources": [
+        "src/content/styles.css",
+        "assets/schemas-B2kriEez.js",
+        "assets/schemas-B2kriEez.js.map",
+        "assets/main.tsx-DANFOvpq.js",
+        "assets/main.tsx-DANFOvpq.js.map"
+      ],
+      "use_dynamic_url": false
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "GenChat",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  }
+}

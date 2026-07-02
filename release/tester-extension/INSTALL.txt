@@ -1,0 +1,12 @@
+GenChat tester build
+
+1. Open chrome://extensions
+2. Turn on Developer mode
+3. Click Load unpacked
+4. Select this tester-extension folder
+5. Open a GenLayer docs page or relevant X/Twitter post
+6. Click the GenChat bubble when it appears
+
+This build is wired to: https://genchat-api-production.genchat-vibecode.workers.dev
+
+If the extension was already loaded before, remove the old unpacked version first and load this one fresh.
