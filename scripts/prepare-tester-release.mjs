@@ -66,13 +66,13 @@ function ensureCleanReleaseDir() {
 }
 
 async function main() {
-  if (!existsSync(extensionEnvPath)) {
-    throw new Error("apps/extension/.env is missing.");
-  }
+  const apiBase =
+    process.env.VITE_GENCHAT_API_BASE ||
+    process.env.GENCHAT_API_BASE_URL ||
+    (existsSync(extensionEnvPath) ? readEnvValue(extensionEnvPath, "VITE_GENCHAT_API_BASE") : "");
 
-  const apiBase = readEnvValue(extensionEnvPath, "VITE_GENCHAT_API_BASE");
   if (!apiBase) {
-    throw new Error("VITE_GENCHAT_API_BASE is missing from apps/extension/.env.");
+    throw new Error("VITE_GENCHAT_API_BASE is missing. Set it in apps/extension/.env or pass it as an environment variable.");
   }
   if (!/^https?:\/\//i.test(apiBase)) {
     throw new Error("VITE_GENCHAT_API_BASE must be a full URL.");

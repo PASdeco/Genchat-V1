@@ -156,26 +156,44 @@ npm run build
 
 ## Public Tester Release
 
-Once the API is live and `apps/extension/.env` points at it, generate the public tester package:
+This repository is set up so source code stays in GitHub, while tester builds are distributed through GitHub Releases.
+
+### One-time GitHub setup
+
+Add a repository variable named `GENCHAT_API_BASE_URL` under `Settings` > `Secrets and variables` > `Actions`.
+
+Set it to your deployed Worker URL.
+
+### Release a tester build
+
+You can still generate a tester package locally with:
 
 ```bash
 npm run release:tester
 ```
 
-That command:
+For the clean public flow, use the GitHub Actions workflow in [.github/workflows/public-release.yml](C:/Vibecode/Genchat/.github/workflows/public-release.yml):
+
+- run it manually from the `Actions` tab, or
+- push a tag like `v0.1.0`
+
+The workflow:
 
 - verifies the live API health endpoint
 - rebuilds the workspace
 - creates `release/tester-extension`
 - creates `release/tester-extension.zip`
-- writes an `INSTALL.txt` for testers
+- uploads the tester package as a workflow artifact
+- publishes `tester-extension.zip` to the GitHub Release for tagged builds
 
 Testers install by:
 
-1. Opening `chrome://extensions`
-2. Turning on `Developer mode`
-3. Clicking `Load unpacked`
-4. Selecting `release/tester-extension`
+1. Downloading `tester-extension.zip` from the latest GitHub Release
+2. Extracting it to a normal folder
+3. Opening `chrome://extensions`
+4. Turning on `Developer mode`
+5. Clicking `Load unpacked`
+6. Selecting the extracted `tester-extension` folder
 
 Public testing notes are in `PUBLIC_TESTING.md`.
 
